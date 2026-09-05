@@ -98,7 +98,9 @@
     },
     "history": "History",
     "newChat": "New chat",
-    "noHistory": "No conversations yet"
+    "noHistory": "No conversations yet",
+    "deleteChat": "Delete conversation",
+    "confirmDelete": "Delete this conversation? This can't be undone."
   },
   "writing": {
     "eyebrow": "03 · Writing support",
@@ -137,6 +139,12 @@
     "eyebrow": "Institution tools",
     "title": "Policy Knowledge Base",
     "description": "Upload your university's AI-use policy, MQA guidelines, and NAGI framework documents.",
+    "logoTitle": "University logo",
+    "logoDescription": "Shown on the dashboard for your policy admins and students. PNG, JPEG, SVG, or WebP, up to 2MB.",
+    "logoUpload": "Upload logo",
+    "logoRemove": "Remove",
+    "logoResizeHint": "Drag the handle to resize how the logo appears on the dashboard.",
+    "logoResizeHandle": "Resize logo",
     "upload": "Upload document",
     "documents": "Uploaded documents",
     "chatGaps": "Unanswered / low-confidence questions",
@@ -160,6 +168,7 @@
   "common": {
     "loading": "Loading...",
     "error": "Something went wrong. Please try again.",
-    "language": "Bahasa Malaysia"
+    "language": "Bahasa Malaysia",
+    "cancel": "Cancel"
   }
 }

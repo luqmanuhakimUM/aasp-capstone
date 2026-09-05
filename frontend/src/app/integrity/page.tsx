@@ -1,12 +1,13 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { MessageSquarePlus, Send, ShieldCheck } from "lucide-react";
-import { FormEvent, useEffect, useState } from "react";
+import { MessageSquarePlus, Send, ShieldCheck, Trash2 } from "lucide-react";
+import { FormEvent, MouseEvent, useEffect, useState } from "react";
 
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
+import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import PageHeader from "@/components/ui/PageHeader";
 import { api, ApiError } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
@@ -62,6 +63,7 @@ export default function IntegrityPage() {
   const [messages, setMessages] = useState<DisplayMessage[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
 
   const loadSessions = () => {
     api
@@ -96,6 +98,24 @@ export default function IntegrityPage() {
     setSessionId(undefined);
     setMessages([]);
     setError(null);
+  };
+
+  const requestDelete = (id: string, e: MouseEvent) => {
+    e.stopPropagation();
+    setDeleteTarget(id);
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+    const id = deleteTarget;
+    setDeleteTarget(null);
+    try {
+      await api.delete(`/api/integrity/sessions/${id}`);
+      setSessions((prev) => prev.filter((s) => s.id !== id));
+      if (id === sessionId) newChat();
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : t("common.error"));
+    }
   };
 
   const ask = async (value: string) => {
@@ -156,19 +176,27 @@ export default function IntegrityPage() {
           <div className="mt-3 space-y-1.5">
             {sessions.length === 0 && <p className="text-caption text-ink-tertiary">{t("integrity.noHistory")}</p>}
             {sessions.map((s) => (
-              <button
+              <div
                 key={s.id}
-                onClick={() => openSession(s.id)}
                 className={
-                  "block w-full rounded-lg px-2.5 py-2 text-left text-caption transition-colors " +
+                  "flex items-center gap-1 rounded-lg pr-1 text-caption transition-colors " +
                   (s.id === sessionId ? "bg-brand-tint text-brand-700" : "text-ink-secondary hover:bg-surface-sunken")
                 }
               >
-                <span className="block truncate font-medium">{s.preview || t("integrity.newChat")}</span>
-                <span className="block text-[11px] text-ink-tertiary">
-                  {new Date(s.started_at).toLocaleDateString()}
-                </span>
-              </button>
+                <button onClick={() => openSession(s.id)} className="min-w-0 flex-1 px-2.5 py-2 text-left">
+                  <span className="block truncate font-medium">{s.preview || t("integrity.newChat")}</span>
+                  <span className="block text-[11px] text-ink-tertiary">
+                    {new Date(s.started_at).toLocaleDateString()}
+                  </span>
+                </button>
+                <button
+                  onClick={(e) => requestDelete(s.id, e)}
+                  aria-label={t("integrity.deleteChat")}
+                  className="grid h-11 w-11 shrink-0 place-items-center rounded-md text-ink-tertiary hover:bg-danger-bg hover:text-danger-text"
+                >
+                  <Trash2 className="h-3.5 w-3.5" />
+                </button>
+              </div>
             ))}
           </div>
         </Card>
@@ -271,6 +299,16 @@ export default function IntegrityPage() {
           </form>
         </div>
       </div>
+
+      <ConfirmDialog
+        open={deleteTarget !== null}
+        title={t("integrity.deleteChat")}
+        message={t("integrity.confirmDelete")}
+        confirmLabel={t("integrity.deleteChat")}
+        cancelLabel={t("common.cancel")}
+        onConfirm={confirmDelete}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </div>
   );
 }

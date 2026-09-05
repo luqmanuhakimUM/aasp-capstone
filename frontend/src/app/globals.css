@@ -18,6 +18,15 @@
   --text-secondary: #5b6472;
   --text-tertiary: #8b95a3;
 
+  /* Dashboard hero: intentionally NOT redefined under [data-theme="dark"] --
+     this card stays a fixed light surface in both themes (a deliberate
+     "light card on a dark page" contrast element) so an uploaded university
+     logo always has a light, flat, non-gradient backdrop to sit on. */
+  --dashboard-hero-bg: #eff6ff;
+  --dashboard-hero-eyebrow: #8b95a3;
+  --dashboard-hero-title: #111827;
+  --dashboard-hero-body: #5b6472;
+
   /* Brand (academic blue) */
   --brand-50: #eff6ff;
   --brand-100: #dbeafe;
@@ -185,6 +194,33 @@ body {
   background: var(--sidebar-translucent);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
+}
+
+.ambient-glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(60px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+:root[data-theme="dark"] .ambient-glow {
+  opacity: 0.35;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ambient-glow-float {
+    animation: ambient-float 12s ease-in-out infinite;
+  }
+  @keyframes ambient-float {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(24px, -18px) scale(1.08);
+    }
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -27,10 +27,16 @@ class Tenant(Base):
     id: Mapped[uuid.UUID] = mapped_column(GUID(), primary_key=True, default=gen_uuid)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     locale_default: Mapped[str] = mapped_column(String(5), default="en")
+    logo_filename: Mapped[str] = mapped_column(String(255), nullable=True)
+    logo_scale: Mapped[int] = mapped_column(Integer, default=100)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
     users: Mapped[list["User"]] = relationship(back_populates="tenant")
     policy_documents: Mapped[list["PolicyDocument"]] = relationship(back_populates="tenant")
+
+    @property
+    def logo_url(self) -> str | None:
+        return f"/logos/{self.logo_filename}" if self.logo_filename else None
 
 
 class User(Base):
@@ -45,6 +51,18 @@ class User(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
     tenant: Mapped["Tenant"] = relationship(back_populates="users")
+
+    @property
+    def tenant_name(self) -> str:
+        return self.tenant.name
+
+    @property
+    def tenant_logo_url(self) -> str | None:
+        return self.tenant.logo_url
+
+    @property
+    def tenant_logo_scale(self) -> int:
+        return self.tenant.logo_scale
 
 
 class PolicyDocument(Base):

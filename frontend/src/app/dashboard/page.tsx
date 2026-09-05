@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowUpRight, Link2, PenLine, Search, ShieldCheck } from "lucide-react";
+import { useState } from "react";
 
 import { useAuth } from "@/components/AuthProvider";
 import { staggerContainer, staggerItem } from "@/components/ui/motionPresets";
+import { assetUrl } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
 
 const CARDS = [
@@ -16,26 +18,56 @@ const CARDS = [
 ];
 
 const ICON_TONE_CLASSES: Record<(typeof CARDS)[number]["tone"], string> = {
-  brand: "bg-brand-500 text-white",
-  amber: "bg-amber text-amber-ink",
-  purple: "bg-purple-text text-white",
-  neutral: "bg-neutral-text text-white",
+  brand: "bg-gradient-to-br from-brand-500 to-brand-600 text-white shadow-[0_6px_16px_-4px_var(--brand-500)] transition-shadow group-hover:shadow-[0_10px_24px_-4px_var(--brand-500)]",
+  amber: "bg-amber text-amber-ink shadow-[0_6px_16px_-4px_var(--amber-accent)] transition-shadow group-hover:shadow-[0_10px_24px_-4px_var(--amber-accent)]",
+  purple: "bg-purple-text text-white shadow-[0_6px_16px_-4px_var(--purple-text)] transition-shadow group-hover:shadow-[0_10px_24px_-4px_var(--purple-text)]",
+  neutral: "bg-neutral-text text-white shadow-[0_6px_16px_-4px_var(--neutral-text)] transition-shadow group-hover:shadow-[0_10px_24px_-4px_var(--neutral-text)]",
 };
 
 export default function DashboardPage() {
   const { user } = useAuth();
   const { t } = useI18n();
+  const [logoAspectRatio, setLogoAspectRatio] = useState(1);
 
   return (
     <div className="space-y-9">
-      <section className="rounded-3xl bg-brand-tint px-6 py-8 md:px-10 md:py-10">
-        <div className="max-w-2xl">
-          <div className="mb-3 text-eyebrow">{t("dashboard.subtitle")}</div>
-          <h1 className="text-display text-ink-primary">
+      <section className="relative overflow-hidden rounded-3xl bg-[var(--dashboard-hero-bg)] px-6 py-8 md:px-10 md:py-10">
+        {user?.tenant_logo_url && (
+          <div className="pointer-events-none absolute inset-y-0 left-1/2 right-0 hidden items-center justify-center px-8 py-6 md:flex md:py-8">
+            <div
+              className="relative h-full max-w-full"
+              style={{ aspectRatio: logoAspectRatio, transform: `scale(${user.tenant_logo_scale / 100})` }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={assetUrl(user.tenant_logo_url)}
+                alt={user.tenant_name}
+                className="h-full w-full object-contain"
+                onLoad={(e) => {
+                  const { naturalWidth, naturalHeight } = e.currentTarget;
+                  if (naturalWidth && naturalHeight) setLogoAspectRatio(naturalWidth / naturalHeight);
+                }}
+              />
+            </div>
+          </div>
+        )}
+
+        <div className="relative min-w-0 max-w-2xl">
+          <div className="mb-3 text-eyebrow" style={{ color: "var(--dashboard-hero-eyebrow)" }}>
+            {t("dashboard.subtitle")}
+          </div>
+          <h1 className="text-display break-words" style={{ color: "var(--dashboard-hero-title)" }}>
             {t("dashboard.welcome")}
             {user ? `, ${user.email}` : ""}
           </h1>
-          <p className="mt-3 max-w-md text-body text-ink-secondary">{t("dashboard.goal")}</p>
+          <p className="mt-3 max-w-md text-body" style={{ color: "var(--dashboard-hero-body)" }}>
+            {t("dashboard.goal")}
+          </p>
+          {user?.tenant_logo_url && (
+            <p className="mt-4 text-caption font-semibold md:hidden" style={{ color: "var(--dashboard-hero-body)" }}>
+              {user.tenant_name}
+            </p>
+          )}
         </div>
       </section>
 

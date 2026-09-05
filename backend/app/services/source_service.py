@@ -1,6 +1,7 @@
 """Source Organiser: resolves raw URLs/titles into formatted, annotated,
 credibility-checked reference entries (FR-20..FR-25)."""
 import io
+from concurrent.futures import ThreadPoolExecutor
 
 from docx import Document
 from docx.shared import Inches
@@ -12,14 +13,17 @@ SYSTEM_PROMPT = """You write a single 1-2 sentence annotation summarizing what a
 
 
 def organise_sources(entries: list[str], language: str) -> list[dict]:
-    results = []
-    for raw_entry in entries:
+    def process(raw_entry: str) -> dict:
         resolved = resolve_single_entry(raw_entry)
         if resolved is None:
-            results.append(_unresolved_entry(raw_entry))
-            continue
-        results.append(_build_reference_entry(resolved, language))
-    return results
+            return _unresolved_entry(raw_entry)
+        return _build_reference_entry(resolved, language)
+
+    # Each entry's resolve+annotate pipeline is independent (no shared state,
+    # no DB access here) -- run them concurrently instead of one at a time,
+    # since this was previously the main reason a 20-entry batch was slow.
+    with ThreadPoolExecutor(max_workers=min(8, len(entries)) or 1) as executor:
+        return list(executor.map(process, entries))
 
 
 def _build_reference_entry(source: dict, language: str) -> dict:

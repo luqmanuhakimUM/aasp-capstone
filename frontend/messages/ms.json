@@ -98,7 +98,9 @@
     },
     "history": "Sejarah",
     "newChat": "Perbualan baharu",
-    "noHistory": "Belum ada perbualan"
+    "noHistory": "Belum ada perbualan",
+    "deleteChat": "Padam perbualan",
+    "confirmDelete": "Padam perbualan ini? Tindakan ini tidak boleh dibatalkan."
   },
   "writing": {
     "eyebrow": "03 · Sokongan penulisan",
@@ -137,6 +139,12 @@
     "eyebrow": "Alatan institusi",
     "title": "Pangkalan Pengetahuan Dasar",
     "description": "Muat naik dasar penggunaan AI universiti anda, garis panduan MQA, dan dokumen rangka kerja NAGI.",
+    "logoTitle": "Logo universiti",
+    "logoDescription": "Dipaparkan di papan pemuka untuk admin dasar dan pelajar anda. PNG, JPEG, SVG, atau WebP, sehingga 2MB.",
+    "logoUpload": "Muat naik logo",
+    "logoRemove": "Alih keluar",
+    "logoResizeHint": "Seret pemegang untuk mengubah saiz paparan logo di papan pemuka.",
+    "logoResizeHandle": "Ubah saiz logo",
     "upload": "Muat naik dokumen",
     "documents": "Dokumen dimuat naik",
     "chatGaps": "Soalan tidak terjawab / keyakinan rendah",
@@ -160,6 +168,7 @@
   "common": {
     "loading": "Memuatkan...",
     "error": "Sesuatu tidak kena. Sila cuba lagi.",
-    "language": "English"
+    "language": "English",
+    "cancel": "Batal"
   }
 }

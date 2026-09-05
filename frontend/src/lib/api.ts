@@ -48,7 +48,8 @@ export const api = {
   get: <T>(path: string) => request<T>(path, { method: "GET" }),
   post: <T>(path: string, body?: unknown) =>
     request<T>(path, { method: "POST", body: body !== undefined ? JSON.stringify(body) : undefined }),
-  patch: <T>(path: string, params?: Record<string, string | boolean>) => {
+  delete: <T>(path: string) => request<T>(path, { method: "DELETE" }),
+  patch: <T>(path: string, params?: Record<string, string | boolean | number>) => {
     const qs = params
       ? "?" + new URLSearchParams(Object.entries(params).map(([k, v]) => [k, String(v)])).toString()
       : "";
@@ -107,6 +108,8 @@ export interface Tenant {
   id: string;
   name: string;
   locale_default: string;
+  logo_url: string | null;
+  logo_scale: number;
 }
 
 export interface UserProfile {
@@ -114,7 +117,15 @@ export interface UserProfile {
   email: string;
   role: string;
   tenant_id: string;
+  tenant_name: string;
+  tenant_logo_url: string | null;
+  tenant_logo_scale: number;
   language_pref: string;
+}
+
+/** Prefixes a backend-relative asset path (e.g. a tenant logo) with the API base URL. */
+export function assetUrl(path: string | null | undefined): string | undefined {
+  return path ? `${API_BASE_URL}${path}` : undefined;
 }
 
 export interface TokenResponse {

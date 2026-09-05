@@ -1,5 +1,8 @@
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text
 
 from app.config import settings
@@ -16,6 +19,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# University logos are public assets (shown pre- and post-login), unlike
+# policy documents -- kept in their own mounted subdirectory rather than
+# exposing all of storage_dir, so private policy PDFs stay server-side only.
+_logos_dir = os.path.join(settings.storage_dir, "logos")
+os.makedirs(_logos_dir, exist_ok=True)
+app.mount("/logos", StaticFiles(directory=_logos_dir), name="logos")
 
 
 @app.on_event("startup")

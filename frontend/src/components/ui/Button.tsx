@@ -3,12 +3,15 @@
 import { motion, type HTMLMotionProps } from "motion/react";
 import React from "react";
 
-type Variant = "primary" | "secondary" | "ghost";
+type Variant = "primary" | "secondary" | "ghost" | "danger";
 
 const VARIANT_CLASSES: Record<Variant, string> = {
-  primary: "bg-brand-500 text-white hover:bg-brand-600 disabled:bg-brand-500",
+  primary:
+    "bg-gradient-to-br from-brand-500 to-brand-600 text-white shadow-[0_4px_14px_-4px_var(--brand-500)] hover:shadow-[0_6px_20px_-2px_var(--brand-500)] hover:brightness-110",
   secondary: "bg-surface-elevated text-ink-primary border border-line hover:border-line-strong",
   ghost: "bg-transparent text-ink-secondary hover:text-brand-700 hover:bg-brand-tint",
+  danger:
+    "bg-gradient-to-br from-red-500 to-red-600 text-white shadow-[0_4px_14px_-4px_rgba(220,38,38,0.5)] hover:shadow-[0_6px_20px_-2px_rgba(220,38,38,0.5)] hover:brightness-110",
 };
 
 interface ButtonProps extends Omit<HTMLMotionProps<"button">, "className" | "children"> {
@@ -32,8 +35,8 @@ export default function Button({
       transition={{ type: "spring", bounce: 0, duration: 0.25 }}
       disabled={disabled || loading}
       className={
-        "inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold " +
-        "disabled:cursor-not-allowed disabled:opacity-50 " +
+        "inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 " +
+        "disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:hover:brightness-100 " +
         VARIANT_CLASSES[variant] +
         " " +
         className

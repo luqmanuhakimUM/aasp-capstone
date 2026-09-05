@@ -7,6 +7,7 @@ OpenAlex instead. Each function fails soft (returns []) on error so one
 slow/down provider never fails the whole search (NFR-8).
 """
 import re
+from concurrent.futures import ThreadPoolExecutor
 
 import httpx
 
@@ -127,11 +128,16 @@ def _reconstruct_abstract(inverted_index: dict | None) -> str:
 
 
 def search_all_sources(topic: str, limit_per_source: int = 8) -> list[dict]:
-    combined = (
-        search_semantic_scholar(topic, limit_per_source)
-        + search_doaj(topic, limit_per_source)
-        + search_openalex(topic, limit_per_source)
-    )
+    # The three providers are independent network calls -- run them
+    # concurrently rather than one after another (each has its own 10s
+    # timeout, so sequential was up to 3x slower in the worst case).
+    with ThreadPoolExecutor(max_workers=3) as executor:
+        futures = [
+            executor.submit(search_semantic_scholar, topic, limit_per_source),
+            executor.submit(search_doaj, topic, limit_per_source),
+            executor.submit(search_openalex, topic, limit_per_source),
+        ]
+        combined = [item for future in futures for item in future.result()]
     return _dedupe(combined)
 
 

@@ -68,3 +68,12 @@ def get_history(session_id: uuid.UUID, current_user: User = Depends(get_current_
     if session is None or session.user_id != current_user.id:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Chat session not found")
     return [ChatMessageOut.model_validate(m) for m in session.messages]
+
+
+@router.delete("/sessions/{session_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_session(session_id: uuid.UUID, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    session = db.get(ChatSession, session_id)
+    if session is None or session.user_id != current_user.id:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Chat session not found")
+    db.delete(session)
+    db.commit()

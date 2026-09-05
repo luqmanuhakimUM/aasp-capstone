@@ -60,6 +60,11 @@ def _call(system: str, user: str, max_tokens: int, json_mode: bool) -> str:
             {"role": "user", "content": user},
         ],
         "stream": False,
+        # Ollama unloads an idle model after 5 minutes by default, and the
+        # next request pays a multi-second reload cost before it can even
+        # start generating. Keeping it warm for longer avoids that tax on
+        # every request after a short gap (e.g. between page navigations).
+        "keep_alive": "30m",
         "options": {"num_predict": max_tokens},
     }
     if json_mode:

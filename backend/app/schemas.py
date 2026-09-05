@@ -9,6 +9,8 @@ class TenantOut(BaseModel):
     id: uuid.UUID
     name: str
     locale_default: str
+    logo_url: str | None = None
+    logo_scale: int = 100
 
     class Config:
         from_attributes = True
@@ -31,6 +33,9 @@ class UserOut(BaseModel):
     email: str
     role: str
     tenant_id: uuid.UUID
+    tenant_name: str
+    tenant_logo_url: str | None = None
+    tenant_logo_scale: int = 100
     language_pref: str
 
     class Config:
