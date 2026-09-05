@@ -1,0 +1,28 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: aasp_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: aasp
+      POSTGRES_PASSWORD: aasp
+      POSTGRES_DB: aasp
+    ports:
+      - "5432:5432"
+    volumes:
+      - aasp_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aasp"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: aasp_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+volumes:
+  aasp_postgres_data:

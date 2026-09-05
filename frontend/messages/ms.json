@@ -1,0 +1,165 @@
+{
+  "appName": "Platform Kejayaan Akademik AI",
+  "nav": {
+    "dashboard": "Papan Pemuka",
+    "research": "Penemuan Penyelidikan",
+    "integrity": "Penasihat Integriti",
+    "writing": "Sokongan Penulisan",
+    "sources": "Penyusun Sumber",
+    "admin": "Admin Dasar",
+    "super-admin": "Universiti",
+    "logout": "Log keluar",
+    "login": "Log masuk",
+    "register": "Daftar"
+  },
+  "login": {
+    "title": "Log masuk",
+    "email": "E-mel",
+    "password": "Kata laluan",
+    "submit": "Log masuk",
+    "noAccount": "Belum ada akaun?",
+    "createOne": "Daftar akaun",
+    "error": "E-mel atau kata laluan tidak sah."
+  },
+  "register": {
+    "title": "Cipta akaun anda",
+    "university": "Universiti anda",
+    "email": "E-mel",
+    "password": "Kata laluan (min. 8 aksara)",
+    "consent": "Saya bersetuju data saya (e-mel, draf, sejarah carian, sejarah sembang) diproses untuk menyediakan ciri platform ini, terhad kepada universiti saya dan tidak dikongsi merentas institusi.",
+    "submit": "Cipta akaun",
+    "haveAccount": "Sudah ada akaun?",
+    "logIn": "Log masuk"
+  },
+  "auth": {
+    "overviewEyebrow": "Platform Kejayaan Akademik AI",
+    "overviewTitle": "Sokongan penyelidikan, integriti, dan penulisan -- di satu tempat.",
+    "overviewDescription": "Cari sumber kredibel, semak dasar penggunaan AI anda, dan dapatkan maklum balas penulisan dalam Bahasa Inggeris atau Bahasa Malaysia -- direka untuk sambungan mudah alih data rendah.",
+    "google": "Teruskan dengan Google",
+    "or": "atau",
+    "signingIn": "Melog masuk anda...",
+    "errors": {
+      "google_cancelled": "Log masuk Google dibatalkan.",
+      "google_failed": "Log masuk Google tidak berjaya. Sila cuba lagi.",
+      "google_no_account": "Tiada akaun dijumpai untuk e-mel Google itu. Daftar dahulu, kemudian log masuk Google akan berfungsi."
+    }
+  },
+  "dashboard": {
+    "welcome": "Selamat kembali",
+    "subtitle": "Ruang kerja akademik anda",
+    "goal": "Matlamat: cari 5 sumber kredibel, fahami cara memetiknya, dan semak peraturan penggunaan AI anda dalam masa kurang 20 minit.",
+    "quickEyebrow": "Mula di sini",
+    "quick": "Akses pantas",
+    "cta": {
+      "research": "Mula carian",
+      "integrity": "Tanya soalan",
+      "writing": "Semak draf",
+      "sources": "Susun sumber"
+    }
+  },
+  "research": {
+    "eyebrow": "01 · Penemuan penyelidikan",
+    "topicLabel": "Topik penyelidikan",
+    "title": "Penemuan Penyelidikan",
+    "description": "Taip topik. Kami akan mencari pangkalan data akses terbuka dan meringkaskan literatur untuk anda.",
+    "placeholder": "cth. kesan media sosial terhadap prestasi akademik",
+    "submit": "Cari",
+    "searching": "Mencari pangkalan data akses terbuka dan meringkaskan...",
+    "stages": [
+      "Mencari di Semantic Scholar...",
+      "Mencari di DOAJ...",
+      "Mencari di OpenAlex...",
+      "Membaca abstrak dan mengenal pasti tema..."
+    ],
+    "emptyTitle": "Peta bukti anda akan muncul di sini",
+    "empty": "Cari topik untuk melihat tema, dapatan, jurang dan sumber di sebalik ringkasan.",
+    "themes": "Tema",
+    "keyFindings": "Dapatan Utama",
+    "gaps": "Jurang Penyelidikan",
+    "sources": "Sumber Dijumpai",
+    "noAbstracts": "Kami menemui sumber tetapi tidak dapat memperoleh cukup teks abstrak untuk meringkaskannya. Lihat senarai sumber di bawah.",
+    "copyApa": "Salin petikan APA",
+    "copied": "Disalin!",
+    "exportWord": "Eksport sebagai Word"
+  },
+  "integrity": {
+    "eyebrow": "02 · Integriti akademik",
+    "emptyTitle": "Tanya dengan yakin",
+    "empty": "Setiap jawapan menunjukkan klausa polisi di sebaliknya.",
+    "title": "Penasihat Integriti Akademik",
+    "description": "Tanya tentang peraturan penggunaan AI, plagiarisme, kaedah petikan, atau akibat salah laku akademik -- dijawab berdasarkan dasar sebenar universiti anda.",
+    "placeholder": "Taip soalan anda dalam Bahasa Inggeris atau Bahasa Malaysia...",
+    "send": "Hantar",
+    "disclaimer": "Jawapan berasaskan dokumen dasar yang dimuat naik oleh universiti anda. Jika tidak pasti, sahkan dengan fakulti anda.",
+    "confidence": {
+      "high": "Keyakinan tinggi",
+      "medium": "Keyakinan sederhana",
+      "low": "Keyakinan rendah"
+    },
+    "history": "Sejarah",
+    "newChat": "Perbualan baharu",
+    "noHistory": "Belum ada perbualan"
+  },
+  "writing": {
+    "eyebrow": "03 · Sokongan penulisan",
+    "title": "Ejen Sokongan Penulisan",
+    "description": "Tampal perenggan atau abstrak untuk mendapat maklum balas berstruktur. Kami tidak akan menulis semula untuk anda -- kerja anda kekal milik anda.",
+    "placeholder": "Tampal draf perenggan atau abstrak anda di sini...",
+    "submit": "Dapatkan maklum balas",
+    "sessionOnly": "Sesi sahaja",
+    "integrityNote": "Integriti mengikut reka bentuk:",
+    "integrityNoteBody": "Kami tidak sesekali menulis semula teks anda dan tidak menyimpan draf anda selepas sesi ini.",
+    "emptyTitle": "Jurulatih, bukan penulis hantu",
+    "empty": "Lihat dengan tepat di mana hujah, bukti dan aliran ayat anda boleh diperkukuh.",
+    "clarity": "Kejelasan Hujah",
+    "citationGaps": "Jurang Petikan",
+    "grammar": "Tatabahasa",
+    "suggestions": "Cadangan"
+  },
+  "sources": {
+    "eyebrow": "04 · Penyusun sumber",
+    "emptyTitle": "Rujukan anda, dengan konteks",
+    "empty": "Anotasi dan tag kredibiliti membantu anda menentukan sumber mana yang cukup kukuh untuk dipetik.",
+    "title": "Penyusun Sumber",
+    "description": "Tampal URL atau tajuk kertas kerja, satu setiap baris. Kami akan memformat rujukan, memberi anotasi, dan menyemak kredibiliti.",
+    "placeholder": "https://example.com/paper1\nTajuk Kertas Kerja Lain",
+    "submit": "Susun sumber",
+    "credibility": {
+      "peer_reviewed": "Disemak rakan sebaya",
+      "grey_literature": "Literatur kelabu",
+      "non_academic": "Bukan akademik",
+      "unknown": "Tidak diketahui"
+    },
+    "unresolved": "Tidak dapat menyelesaikan entri ini",
+    "exportWord": "Eksport sebagai Word"
+  },
+  "admin": {
+    "eyebrow": "Alatan institusi",
+    "title": "Pangkalan Pengetahuan Dasar",
+    "description": "Muat naik dasar penggunaan AI universiti anda, garis panduan MQA, dan dokumen rangka kerja NAGI.",
+    "upload": "Muat naik dokumen",
+    "documents": "Dokumen dimuat naik",
+    "chatGaps": "Soalan tidak terjawab / keyakinan rendah",
+    "active": "Aktif",
+    "inactive": "Tidak aktif"
+  },
+  "superAdmin": {
+    "eyebrow": "Platform",
+    "title": "Universiti Terdaftar",
+    "description": "Daftarkan universiti baharu ke platform dengan data terasing sendiri dan akaun admin dasar permulaan.",
+    "nameLabel": "Nama universiti",
+    "localeLabel": "Bahasa lalai",
+    "adminEmailLabel": "E-mel admin dasar",
+    "adminPasswordLabel": "Kata laluan admin dasar (min. 8 aksara)",
+    "submit": "Daftarkan universiti",
+    "existing": "Universiti sedia ada",
+    "emptyTitle": "Belum ada universiti",
+    "empty": "Daftarkan universiti pertama untuk bermula.",
+    "created": "Universiti berjaya didaftarkan. Kongsikan e-mel/kata laluan admin dengan admin dasar mereka."
+  },
+  "common": {
+    "loading": "Memuatkan...",
+    "error": "Sesuatu tidak kena. Sila cuba lagi.",
+    "language": "English"
+  }
+}

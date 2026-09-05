@@ -1,0 +1,26 @@
+# Python
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/.pytest_cache/
+backend/.env
+backend/storage/
+backend/*.db
+
+# Node / Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.env.local
+frontend/tsconfig.tsbuildinfo
+website/node_modules/
+website/.next/
+website/out/
+website/.env*
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
